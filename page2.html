@@ -1,0 +1,37 @@
+<!-- Value passing one page to another 
+     Author: Codemaker
+-->
+
+<html>
+    <head>
+        <title> Page 2 - Codemaker</title>
+    </head>
+    <body>
+        <script>
+            function getParams(){
+                var idx = document.URL.indexOf('?');
+                var params = new Array();
+                if (idx != -1) {
+                    var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
+                    console.log(pairs);
+                    for (var i=0; i<pairs.length; i++){
+                        nameVal = pairs[i].split('=');
+                        params[i] = nameVal[1];
+                    }
+                }
+                console.log(params)
+                return params;
+            }
+            params = getParams();
+            teamnum = params[0];
+            possible=[];
+            for (var i=1; i<params.length; i++){
+                possible.push(" " + params[i]);
+                
+            }
+            //possible = unescape(params["possible"]);
+            document.write("Team Number: " + teamnum + "<br>");
+            document.write("Possible things they can do: " + possible + "<br>");
+        </script>
+    </body>
+</html>

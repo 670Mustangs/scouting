@@ -1,0 +1,61 @@
+<html>
+<head>
+</head>
+<body>
+<script language="javascript">
+function WriteToFile()
+{
+    window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+var fs = null;
+
+window.requestFileSystem(window.TEMPORARY, 1024 * 1024, function (filesystem) {
+    fs = filesystem;
+}, errorHandler);
+
+fs.root.getFile('Hello.txt', {
+    create: true
+}, null, errorHandler);
+
+
+var s = fs.CreateTextFile("C:\\NewFile.txt", true);
+var text=document.getElementById("TextArea1").innerText;
+s.WriteLine(text);
+s.WriteLine('***********************');
+s.Close();
+}
+
+function errorHandler(e) {
+  var msg = '';
+
+  switch (e.code) {
+    case FileError.QUOTA_EXCEEDED_ERR:
+      msg = 'QUOTA_EXCEEDED_ERR';
+      break;
+    case FileError.NOT_FOUND_ERR:
+      msg = 'NOT_FOUND_ERR';
+      break;
+    case FileError.SECURITY_ERR:
+      msg = 'SECURITY_ERR';
+      break;
+    case FileError.INVALID_MODIFICATION_ERR:
+      msg = 'INVALID_MODIFICATION_ERR';
+      break;
+    case FileError.INVALID_STATE_ERR:
+      msg = 'INVALID_STATE_ERR';
+      break;
+    default:
+      msg = 'Unknown Error';
+      break;
+  };
+
+  console.log('Error: ' + msg);
+}
+</script>
+
+<form name="abc">
+<textarea name="text">FIFA</textarea>
+<button onclick="WriteToFile()">Click to save</Button>  
+</form> 
+
+</body>
+</html>
